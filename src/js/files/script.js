@@ -895,7 +895,8 @@ function initMap() {
   ];
 
   const tabsMap = document.querySelectorAll('button[data-city-map]');
-  debugger;
+  const slectorBtn = document.querySelectorAll('.ya-map__tab');
+
   var myMap = new ymaps.Map(
     'map',
     {
@@ -906,7 +907,17 @@ function initMap() {
       searchControlProvider: 'yandex#search',
     }
   );
-
+  if (slectorBtn) {
+    slectorBtn.forEach((element) => {
+      element.addEventListener('click', (e) => {
+        if (element.closest('._active-tab-map')) {
+          return;
+        }
+        slectorBtn.forEach((el) => el.classList.remove('_active-tab-map'));
+        element.classList.add('_active-tab-map');
+      });
+    });
+  }
   if (tabsMap.length !== 0) {
     tabsMap.forEach((element) => {
       const dataCity = element.dataset.cityMap;
@@ -930,11 +941,6 @@ function initMap() {
 
       element.addEventListener('click', (e) => {
         myMap.setCenter(objCity.center, objCity.zoom);
-        if (element.closest('._active-tab-map')) {
-          return;
-        }
-        tabsMap.forEach((el) => el.classList.remove('_active-tab-map'));
-        element.classList.add('_active-tab-map');
       });
     });
   } else {
