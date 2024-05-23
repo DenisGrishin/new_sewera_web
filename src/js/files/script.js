@@ -20,6 +20,87 @@ function bildSliders() {
 
 function initSliders() {
   bildSliders();
+  // слайдер 'Виды скважин на воду'
+  if (document.querySelector('.types-wells__slider')) {
+    new Swiper('.types-wells__slider', {
+      observer: true,
+      watchSlidesProgress: true,
+      observeParents: true,
+      slidesPerView: 2,
+      spaceBetween: 20,
+      speed: 300,
+      autoHeight: false,
+
+      breakpoints: {
+        319.98: {
+          slidesPerView: 1.3,
+          spaceBetween: 15,
+        },
+        429.98: {
+          slidesPerView: 1.3,
+          spaceBetween: 10,
+        },
+
+        767.98: {
+          autoplay: false,
+          slidesPerView: 1.6,
+        },
+        1023.98: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+          autoplay: false,
+        },
+        1279.98: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+          autoplay: false,
+        },
+      },
+      on: {},
+    });
+  }
+  // слайдер 'Виды обустройства скважины под ключ'
+  if (document.querySelector('.types-arrangement__slider')) {
+    new Swiper('.types-arrangement__slider', {
+      observer: true,
+      watchSlidesProgress: true,
+      observeParents: true,
+      slidesPerView: 2,
+      spaceBetween: 20,
+      speed: 300,
+      autoHeight: false,
+
+      breakpoints: {
+        319.98: {
+          slidesPerView: 1.2,
+          spaceBetween: 15,
+        },
+        429.98: {
+          slidesPerView: 1.2,
+          spaceBetween: 10,
+        },
+        529.98: {
+          slidesPerView: 1.6,
+          spaceBetween: 10,
+        },
+        767.98: {
+          autoplay: false,
+          slidesPerView: 2.1,
+        },
+        1023.98: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+          autoplay: false,
+        },
+        1279.98: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+          autoplay: false,
+        },
+      },
+      on: {},
+    });
+  }
   // слайдер 'Выполненные работы'
   if (document.querySelector('.completed-work__slider')) {
     new Swiper('.completed-work__slider', {
@@ -562,125 +643,6 @@ function initPopupSlider() {
   }
 }
 
-// function initPopupSlider() {
-//   const initPopups = new Popup();
-
-//   const containerSlider = document.querySelector('.submitted__swiper-yt');
-
-//   if (containerSlider) {
-//     containerSlider.addEventListener('click', function (event) {
-//       if (!event.target.closest('.submitted__slide-yt_video')) return;
-
-//       let slideTargetVideo = event.target.closest('.submitted__slide-yt_video')
-//         .dataset.slide;
-
-//       bildSliders();
-
-//       if (document.querySelector('.popup-video__slider')) {
-//         const swiper = new Swiper(
-//           '.popup-video__slider:not(.swiper-initialized)',
-//           {
-//             observer: true,
-//             observeParents: true,
-
-//             spaceBetween: 30,
-//             autoHeight: false,
-//             speed: 500,
-//             pagination: {
-//               el: '',
-//               clickable: true,
-//             },
-//             slideToClickedSlide: true,
-//             navigation: {
-//               nextEl: '#slider-popup-video_navigation #slider-popup-video_next',
-//               prevEl: '#slider-popup-video_navigation #slider-popup-video_prev',
-//             },
-//             breakpoints: {
-//               320: {
-//                 spaceBetween: 15,
-//                 centeredSlides: true,
-//                 slidesPerView: '1.3',
-//               },
-//               430: {
-//                 centeredSlides: true,
-//                 spaceBetween: 15,
-//                 slidesPerView: '1.2',
-//                 initialSlide: 0,
-//               },
-//               768: {
-//                 spaceBetween: 25,
-//                 centeredSlides: false,
-//                 slidesPerView: '1',
-//               },
-//               992: {
-//                 slidesPerView: '1',
-//                 spaceBetween: 30,
-//               },
-//             },
-
-//             on: {},
-//           }
-//         );
-//         swiper.on('update', function () {
-//           swiper.slideTo(slideTargetVideo, 1, false);
-//         });
-//         swiper.on('slideChange', function () {
-//           initPopups.options.on.beforeClose();
-//         });
-//
-//         swiper.update();
-//       }
-//     });
-//   }
-
-//   function findVideos() {
-//     let videos = document.querySelectorAll('._video-yt');
-//     for (let i = 0; i < videos.length; i++) {
-//       setupVideo(videos[i]);
-//     }
-//   }
-//   findVideos();
-//   function setupVideo(video) {
-//     let link = video.querySelector('._video-yt-link');
-//     let button = video.querySelector('._video-yt-btn');
-//     let id = parseIdFromUrl(link.href);
-
-//     video.addEventListener('click', () => {
-//       let iframe = createIframe(id);
-
-//       link.style.display = 'none';
-//       button.style.display = 'none';
-//       video.appendChild(iframe);
-//     });
-
-//     link.removeAttribute('href');
-//     video.classList.add('video--enabled');
-//   }
-
-//   function parseIdFromUrl(url) {
-//     const regexp = /https:\/\/youtu\.be\/([a-zA-Z0-9_-]+)\?*/i;
-//     const match = url.match(regexp);
-
-//     return match ? match[1] : false;
-//   }
-
-//   function createIframe(id) {
-//     let iframe = document.createElement('iframe');
-
-//     iframe.setAttribute('allowfullscreen', '');
-//     iframe.setAttribute('allow', 'autoplay');
-//     iframe.setAttribute('id', 'youtube-slide');
-
-//     iframe.setAttribute('src', generateURL(id));
-//     iframe.classList.add('popup-video__media');
-//     return iframe;
-//   }
-//   function generateURL(id) {
-//     let query = '?enablejsapi=1&rel=0&showinfo=0&autoplay=1';
-
-//     return 'https://www.youtube.com/embed/' + id + query;
-//   }
-// }
 /* инициализация карты */
 function initMap() {
   const cityList = [
@@ -893,8 +855,10 @@ function initMap() {
       ],
     },
   ];
-  const tabsMap = document.querySelectorAll('.ya-map__tab');
 
+  const slectorBtn = document.querySelectorAll('.ya-map__tab');
+
+  const tabsMap = document.querySelectorAll('button[data-city-map]');
   var myMap = new ymaps.Map(
     'map',
     {
@@ -905,6 +869,16 @@ function initMap() {
       searchControlProvider: 'yandex#search',
     }
   );
+
+  slectorBtn.forEach((element) => {
+    element.addEventListener('click', (e) => {
+      if (element.closest('._active-tab-map')) {
+        return;
+      }
+      slectorBtn.forEach((el) => el.classList.remove('_active-tab-map'));
+      element.classList.add('_active-tab-map');
+    });
+  });
 
   if (tabsMap.length !== 0) {
     tabsMap.forEach((element) => {
@@ -926,15 +900,6 @@ function initMap() {
       );
       myMap.geoObjects.add(myPolygon);
       myMap.geoObjects.add(new ymaps.Placemark(objCity.center, {}));
-
-      element.addEventListener('click', (e) => {
-        myMap.setCenter(objCity.center, objCity.zoom);
-        if (element.closest('._active-tab-map')) {
-          return;
-        }
-        tabsMap.forEach((el) => el.classList.remove('_active-tab-map'));
-        element.classList.add('_active-tab-map');
-      });
     });
   } else {
     myMap.geoObjects.add(new ymaps.Placemark([55.73, 37.6], {}));
