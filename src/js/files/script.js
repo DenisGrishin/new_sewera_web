@@ -893,8 +893,9 @@ function initMap() {
       ],
     },
   ];
-  const tabsMap = document.querySelectorAll('.ya-map__tab');
 
+  const tabsMap = document.querySelectorAll('button[data-city-map]');
+  debugger;
   var myMap = new ymaps.Map(
     'map',
     {
