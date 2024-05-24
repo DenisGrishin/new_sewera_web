@@ -1,6 +1,45 @@
 .sewera-septik .wrapper-bg {
 	background: $bgColor;
 }
+
+.sewera-septik .boreholeMapMarker_orange,
+.sewera-septik .boreholeMapMarker_blue {
+	width: 48px;
+	height: 40px;
+	position: relative;
+	z-index: 30;
+	transform: translateY(-20px);
+}
+.sewera-septik .boreholeMapMarker_blue {
+	background: url("../img/icons/blueMarker.svg") 0 0 / 48px 40px no-repeat;
+}
+.sewera-septik .boreholeMapMarker_orange {
+	background: url("../img/icons/orngMarker.svg") 0 0 / cover no-repeat;
+}
+.sewera-septik .ymaps-2-1-79-balloon__content {
+	font-size: 16px !important;
+	line-height: $mediumLh;
+}
+.sewera-septik .ya-map-modal-btn {
+	display: flex;
+	align-items: center;
+}
+.sewera-septik .ya-btn-marker::after {
+	content: "";
+	display: inline-block;
+	background: url("../img/icons/arrow-table.svg") 0 0 / cover no-repeat;
+	width: 11px;
+	height: 11px;
+}
+.sewera-septik .ya-btn-marker {
+	margin-top: 4px;
+	font-weight: 700;
+}
+
+.sewera-septik .mapMarkerContent {
+	text-align: center;
+	padding: 3px 3px 3px 0px;
+}
 .sewera-septik .area-reviews .review-box {
 	background-color: #f0f4f9;
 }
@@ -4081,6 +4120,282 @@ sewera-septik .form-qwiz__user-contact,
 		display: flex;
 		align-items: center;
 		font-weight: 600;
+	}
+}
+// ==================================================
+// ================================================================
+// ==== calc-wells
+// ================================================================
+
+.calc-wells {
+	overflow: hidden;
+	padding: 30px;
+	border-radius: $bigRadiusBor;
+	position: relative;
+	@media (max-width: $tablet) {
+		padding: 15px;
+	}
+	// .calc-wells__forms
+
+	&__forms {
+		display: flex;
+		@media (max-width: $tablet) {
+			flex-direction: column;
+			row-gap: 30px;
+		}
+	}
+
+	// .calc-wells__left
+
+	&__left {
+		padding-right: 30px;
+		border-right: 1px solid;
+		border-right: 1px solid rgba(16, 41, 56, 0.1176470588);
+		flex: 0 1 50%;
+		@media (max-width: $laptop) {
+			padding-right: 20px;
+		}
+		@media (max-width: $tablet) {
+			border-right: 0;
+			padding-right: 0px;
+		}
+	}
+
+	// .calc-wells__block
+
+	&__block {
+		margin-bottom: 20px;
+
+		@media (max-width: $laptop) {
+			font-size: $smallfontSize;
+			line-height: $smallLh;
+		}
+	}
+	// calc-wells__top-block
+	&__top-block {
+		display: flex;
+		position: relative;
+		@media (max-width: 374.98px) {
+			display: flex;
+			flex-direction: column-reverse;
+		}
+	}
+	// calc-wells__block_mb-big
+	&__block_mb-big {
+		margin-bottom: 36px;
+		@media (max-width: $laptop) {
+			margin-bottom: 46px;
+		}
+	}
+
+	// calc-wells__gray-title
+	&__gray-title {
+		margin-right: 20px;
+		opacity: 0.6;
+		font-weight: 700;
+		@media (max-width: 374.98px) {
+			margin-bottom: 10px;
+			margin-right: 0;
+		}
+	}
+	// calc-wells__link-block
+	&__link-block {
+		font-size: 13px;
+		line-height: 130%;
+
+		color: $textColorBlue !important;
+		@media (max-width: $laptop) {
+			position: absolute;
+			top: 90px;
+			left: 0;
+		}
+		@media (max-width: $tablet) {
+			top: 90px;
+		}
+		@media (max-width: 374.98px) {
+			top: 110px;
+		}
+	}
+
+	// .calc-wells__wrapper-inpt
+	&__wrapper-inpt {
+		position: relative;
+		&::before {
+			content: "";
+			display: inline-block;
+			background: url("../img/icons/search.svg") 0 0 no-repeat;
+			width: 17px;
+			height: 16px;
+			position: absolute;
+			top: 50%;
+			transform: translate(0px, -50%);
+			left: 16px;
+		}
+	}
+
+	// .calc-wells__inpt
+	&__inpt {
+		padding: 15px 20px 15px 40px;
+		width: 100%;
+		border-radius: $smallRadiusBor;
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+	}
+
+	// .calc-wells__title
+	&__title {
+		flex: 1 1 auto;
+		font-weight: 700;
+		margin-bottom: 10px;
+		@media (max-width: 374.98px) {
+			margin-bottom: 0px;
+		}
+	}
+	// calc-wells__btn
+	&__btn {
+		padding: 13px 20px;
+
+		@media (max-width: $tablet) {
+			width: 100%;
+			padding: 12px 20px;
+		}
+	}
+	// .calc-wells__right
+
+	&__right {
+		position: relative;
+		position: absolute;
+		width: 860px;
+		height: 100%;
+		top: 0;
+		left: 52%;
+		img {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 15%;
+			left: 0%;
+			object-fit: contain;
+		}
+		@media (max-width: $laptop) {
+			width: 660px;
+			top: 5%;
+		}
+		@media (max-width: $tablet) {
+			display: none;
+		}
+	}
+
+	// .calc-wells__finish
+
+	&__finish {
+		display: none;
+		flex: 0 1 50%;
+		// display: flex;
+		padding-left: 30px;
+		@media (max-width: $laptop) {
+			padding-left: 15px;
+		}
+		@media (max-width: $tablet) {
+			width: 100%;
+			padding-left: 0;
+		}
+	}
+
+	// calc-wells__wrapper-finish
+	&__wrapper-finish {
+		width: 100%;
+		padding: 30px;
+		background-color: #fff;
+		border-radius: $bigRadiusBor;
+		display: flex;
+		flex-direction: column;
+
+		@media (max-width: $laptop) {
+			padding: 15px;
+		}
+		@media (max-width: $tablet) {
+		}
+	}
+	// .calc-wells__sum
+
+	&__sum {
+		font-size: 34px;
+		font-weight: 700;
+		line-height: 115%;
+		margin: 10px 0;
+		@media (max-width: $laptop) {
+			margin: 5px 0;
+		}
+	}
+
+	// .calc-wells__text
+
+	&__text {
+		margin-bottom: 30px;
+		@media (max-width: $laptop) {
+			font-size: $smallfontSize;
+			line-height: $smallLh;
+			margin-bottom: 20px;
+		}
+	}
+
+	// .calc-wells__user-contact
+
+	&__user-contact {
+		flex: 1 1 auto;
+		display: flex;
+		flex-wrap: wrap;
+		@media (max-width: $laptop) {
+		}
+		@media (max-width: $tablet) {
+			flex-direction: row;
+			justify-content: space-between;
+			width: 100%;
+		}
+		@media (max-width: 374.98px) {
+			row-gap: 10px;
+		}
+	}
+
+	// calc-wells__int-blc
+
+	&__int-blc {
+		flex: 0 1 50% !important;
+		&::after {
+			right: 20px !important;
+		}
+		@media (max-width: $laptop) {
+			flex: 1 1 100% !important;
+			&::after {
+				display: none !important;
+			}
+		}
+		@media (max-width: $tablet) {
+			flex: 0 1 48% !important;
+		}
+		@media (max-width: 374.98px) {
+			flex: 1 1 100% !important;
+		}
+	}
+	// .calc-wells__block-user
+
+	&__block-user {
+		flex: 1 1 auto;
+		display: flex;
+		align-items: flex-end;
+	}
+
+	// .calc-wells__btn
+
+	&__btn {
+		margin-top: 28px !important;
+		@media (max-width: $tablet) {
+			margin-top: 20px !important;
+		}
 	}
 }
 

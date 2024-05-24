@@ -363,8 +363,89 @@
 				<section class="section ">
 					<div class="page-bl">
 						<div class="wrapper-bg calc-wells">
-							<h2 class="title-section">Рассчитайте самостоятельно стоимость скважины на воду</h2>
+							<h2 class="title-section">Рассчитайте самостоятельно <br> стоимость скважины на воду</h2>
+							<form class="calc-wells__forms">
+								<div class="calc-wells__left">
+									<div class="calc-wells__block">
+										<h4 class="calc-wells__title">Вид скважины</h4>
+										<select name="Вид скважины" class="form" data-show>
+											<option value data-label="Тип скважины"></option>
+											<option value="Артезианская скважина">Артезианская скважина</option>
+											<option value="Скважина на песок">Скважина на песок</option>
+										</select>
+									</div>
+									<div class="calc-wells__block">
+										<h4 class="calc-wells__title">Вид обустроства</h4>
+										<select name="Вид обустроства" class="form">
+											<option value="0">Без обустройства</option>
+											<option value="250000">С кессоном</option>
+											<option value="150000">С адаптером</option>
+											<option value="50000">Летнее обустройство</option>
+										</select>
+									</div>
+									<div class="calc-wells__block">
+										<h4 class="calc-wells__title">Вид обустроства</h4>
+										<select name="Вид обустроства" data-search class="form">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<!-- <option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option> -->
 
+
+										</select>
+									</div>
+									<div class="calc-wells__block calc-wells__block_mb-big">
+										<div class="calc-wells__top-block">
+											<span class="calc-wells__gray-title ">Глубина скважины, м</span>
+											<span class="calc-wells__title">Район бурения</span>
+											<a href="#" class="calc-wells__link-block">Карта глубин</a>
+										</div>
+										<div class="calc-wells__wrapper-inpt">
+											<input type="number" class="calc-wells__inpt" placeholder="Глубина скважины, м"
+												step="1" min="1" max="250" name="Глубина скважины" id="">
+										</div>
+									</div>
+									<button type="button" class="calc-wells__btn _btn-arrow-org button">Рассчитать</button>
+								</div>
+								<div class="calc-wells__right">
+									<img src="img/banner-img.webp" alt="Рассчитайте самостоятельно стоимость скважины на воду">
+								</div>
+								<div class="calc-wells__finish">
+									<div class="calc-wells__wrapper-finish">
+										<h4><b>Предварительная стоимость</b></h4>
+										<div class="calc-wells__sum">145 600 р.</div>
+										<div class="calc-wells__text">Чтобы получить точную смету, рекомендуем пообщаться с
+											менеджером</div>
+										<div class="calc-wells__user-contact">
+											<div class="feedback_form__group calc-wells__int-blc ">
+												<input class="feedback_form__group-input hover-group-input" type="text"
+													id="feedback-form-name" name="Имя">
+												<label class="feedback_form__group-placeholder"
+													for="feedback-form-name"><span>Имя</span></label>
+											</div>
+											<div class="feedback_form__group form-qwiz__after-none calc-wells__int-blc">
+												<input class="feedback_form__group-input phone_mask hover-group-input" type="tel"
+													id="feedback-form-tel" autocomplete="off" name="Телефон" required="">
+												<label class="feedback_form__group-placeholder"
+													for="feedback-form-tel"><span>Телефон</span></label>
+											</div>
+											<div class="calc-wells__block-user">
+												<button type="submit" class="calc-wells__btn button _btn-arrow-org">
+													Оставить заявку
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</form>
 						</div>
 					</div>
 				</section>
