@@ -2496,6 +2496,7 @@ export class SelectConstructor {
     selectItem.appendChild(originalSelect);
     // Скрываем оригинальный селект
     originalSelect.hidden = true;
+
     // Присваиваем уникальный ID
     index ? (originalSelect.dataset.id = index) : null;
 
@@ -2533,6 +2534,7 @@ export class SelectConstructor {
       ? originalSelect.dataset.speed
       : '150';
     // Событие при изменении оригинального select
+
     originalSelect.addEventListener('change', function (e) {
       _this.selectChange(e);
     });
@@ -2947,11 +2949,18 @@ export class SelectConstructor {
   }
   // Обработчик изменения в селекте
   setSelectChange(originalSelect) {
-    // Моментальная валидация селекта
+    if (
+      originalSelect.dataset.id == 1 &&
+      document.querySelector('.calc-wells__btn')
+    ) {
+      document.querySelector('.calc-wells__btn').classList.remove('_disable');
+      document.querySelector('.calc-wells__btn').disabled = false;
+    } // Моментальная валидация селекта
     if (originalSelect.hasAttribute('data-validate')) {
       // formValidate.validateInput(originalSelect);
     }
     // При изменении селекта отправляем форму
+
     if (originalSelect.hasAttribute('data-submit') && originalSelect.value) {
       let tempButton = document.createElement('button');
       tempButton.type = 'submit';
@@ -2996,7 +3005,6 @@ export class SelectConstructor {
     const _this = this;
     selectInput.addEventListener('input', function () {
       selectOptionsItems.forEach((selectOptionsItem) => {
-        debugger;
         if (
           selectOptionsItem.textContent
             .toUpperCase()
@@ -3022,7 +3030,7 @@ export class SelectConstructor {
     );
   }
 }
-const a = new SelectConstructor();
+const selectCalc = new SelectConstructor();
 // ==============================================================
 // ==============================================================
 // калькуляторо для скважины
@@ -3030,10 +3038,73 @@ const a = new SelectConstructor();
 // ==============================================================
 
 function initCalcWells() {
-  const oneSelect = document.querySelector('select[name="Вид скважины"]');
+  const oneSelect = document.querySelector('select[data-id="1"]');
   const twoSelect = document.querySelector('select[name="Вид обустроства"]');
+  const threeSelect = document.querySelector('select[name="Район бурения"]');
+  const inptCalc = document.querySelector('.calc-wells__inpt');
+  const slectAreaCalc = document.querySelector('.calc-wells__select');
+  const inptBtn = document.querySelector('#int');
+  const calcBtn = document.querySelector('#calc');
+  const sumBtn = document.querySelector('.calc-wells__btn');
+  let isActiv = true;
 
-  console.log(oneSelect.value);
-  console.log(twoSelect.value);
+  isShowCaclTab();
+
+  // преключаем между "Глубина скважины" и "Район бурения"
+  function isShowCaclTab() {
+    inptBtn.addEventListener('click', (e) =>
+      cliclBtn(calcBtn, inptBtn, inptCalc, slectAreaCalc, true)
+    );
+    calcBtn.addEventListener('click', (e) =>
+      cliclBtn(inptBtn, calcBtn, slectAreaCalc, inptCalc, false)
+    );
+    function cliclBtn(
+      removeSelector,
+      addSelector,
+      isHiddenCalc,
+      isHiddenInpt,
+      booleanValue
+    ) {
+      removeSelector.classList.remove('_active');
+      addSelector.classList.add('_active');
+      isHiddenInpt.hidden = true;
+      isHiddenCalc.hidden = false;
+      isActiv = booleanValue;
+    }
+  }
+
+  // кнопка "Рассчитать"
+
+  sumBtn.addEventListener('click', resultCalc);
+  // сделать проерку на эту кнопку
+
+  // selectCalc.setSelectChange(oneSelect);
+
+  function resultCalc(e) {
+    let res = 0;
+    let depthValue = isActiv ? +inptCalc.value : +findValueOption(threeSelect);
+    let wellsValue = oneSelect.value === 'Артезианская скважина' ? 3350 : 3250;
+    let arrangementValue = +twoSelect.value ? +twoSelect.value : '';
+
+    if (depthValue >= 251) {
+      return;
+    }
+
+    if (depthValue < 40) {
+      depthValue = 40;
+    }
+    if (depthValue > 80) {
+      wellsValue = wellsValue + 100;
+    }
+
+    res = wellsValue * depthValue + arrangementValue;
+
+    console.log(res);
+  }
+  // берем значения с "Район бурения"
+  function findValueOption(select) {
+    const option = select.querySelector(`option[value="${select.value}"]`);
+    return option.dataset.valueDepth;
+  }
 }
 initCalcWells();

@@ -1,7 +1,13 @@
 .sewera-septik .wrapper-bg {
 	background: $bgColor;
 }
-
+.sewera-septik [hidden] {
+	display: none !important;
+}
+.sewera-septik ._disable {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
 .sewera-septik .boreholeMapMarker_orange,
 .sewera-septik .boreholeMapMarker_blue {
 	width: 48px;
@@ -4171,13 +4177,31 @@ sewera-septik .form-qwiz__user-contact,
 			line-height: $smallLh;
 		}
 	}
+	&__block_icon-search {
+	}
+	//calc-wells__search-icon
+	&__search-icon {
+		position: relative;
+		&::after {
+			content: "";
+			display: inline-block;
+			background: url(../img/icons/search.svg) 0 0 no-repeat;
+			width: 17px;
+			height: 16px;
+			position: absolute;
+			top: 67%;
+			transform: translate(0px, -50%);
+			left: 16px;
+		}
+	}
 	// calc-wells__top-block
 	&__top-block {
 		display: flex;
 		position: relative;
+
 		@media (max-width: 374.98px) {
 			display: flex;
-			flex-direction: column-reverse;
+			flex-direction: column;
 		}
 	}
 	// calc-wells__block_mb-big
@@ -4188,14 +4212,20 @@ sewera-septik .form-qwiz__user-contact,
 		}
 	}
 
-	// calc-wells__gray-title
-	&__gray-title {
-		margin-right: 20px;
+	// calc-wells__title-block
+
+	&__title-block {
 		opacity: 0.6;
 		font-weight: 700;
-		@media (max-width: 374.98px) {
-			margin-bottom: 10px;
-			margin-right: 0;
+		margin-bottom: 10px;
+		&:nth-child(2) {
+			flex: 1 1 auto;
+		}
+		&:first-child {
+			margin-right: 20px;
+		}
+		&._active {
+			opacity: 1;
 		}
 	}
 	// calc-wells__link-block
@@ -4220,22 +4250,11 @@ sewera-septik .form-qwiz__user-contact,
 	// .calc-wells__wrapper-inpt
 	&__wrapper-inpt {
 		position: relative;
-		&::before {
-			content: "";
-			display: inline-block;
-			background: url("../img/icons/search.svg") 0 0 no-repeat;
-			width: 17px;
-			height: 16px;
-			position: absolute;
-			top: 50%;
-			transform: translate(0px, -50%);
-			left: 16px;
-		}
 	}
 
 	// .calc-wells__inpt
 	&__inpt {
-		padding: 15px 20px 15px 40px;
+		padding: 15.4px 20px 15.4px 40px;
 		width: 100%;
 		border-radius: $smallRadiusBor;
 		&::-webkit-outer-spin-button,
@@ -4246,6 +4265,7 @@ sewera-septik .form-qwiz__user-contact,
 	}
 
 	// .calc-wells__title
+	// calc-wells__title-block
 	&__title {
 		flex: 1 1 auto;
 		font-weight: 700;

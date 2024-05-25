@@ -1,6 +1,6 @@
 // <SELECT>
 // Снипет (HTML): sel
-.select {
+.sewera-septik .select {
 	position: relative;
 	// .select__body
 	&__body {
@@ -54,9 +54,12 @@
 		flex: 1 1 auto;
 	}
 	&__input {
+		padding: 0;
+		padding-left: 25px;
 		width: 100%;
 		background-color: transparent;
 		height: 100%;
+		font-weight: 400;
 	}
 	// .select__options
 	&__options {
@@ -105,7 +108,9 @@
 			}
 		}
 	}
-
+	&__input {
+		border-bottom: 0 !important;
+	}
 	// Конструкция дополнительных данных
 	&__row {
 		display: inline-flex;
