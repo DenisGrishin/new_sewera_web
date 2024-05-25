@@ -3038,73 +3038,219 @@ const selectCalc = new SelectConstructor();
 // ==============================================================
 
 function initCalcWells() {
-  const oneSelect = document.querySelector('select[data-id="1"]');
-  const twoSelect = document.querySelector('select[name="Вид обустроства"]');
-  const threeSelect = document.querySelector('select[name="Район бурения"]');
-  const inptCalc = document.querySelector('.calc-wells__inpt');
-  const slectAreaCalc = document.querySelector('.calc-wells__select');
-  const inptBtn = document.querySelector('#int');
-  const calcBtn = document.querySelector('#calc');
-  const sumBtn = document.querySelector('.calc-wells__btn');
-  let isActiv = true;
+  if (document.querySelector('.calc-wells')) {
+    const oneSelect = document.querySelector('select[data-id="1"]');
+    const twoSelect = document.querySelector('select[name="Вид обустроства"]');
+    const threeSelect = document.querySelector('select[name="Район бурения"]');
+    const inptCalc = document.querySelector('.calc-wells__inpt');
+    const slectAreaCalc = document.querySelector('.calc-wells__select');
+    const inptBtn = document.querySelector('#int');
+    const calcBtn = document.querySelector('#calc');
+    const sumBtn = document.querySelector('.calc-wells__btn');
+    const imgBlock = document.querySelector('.calc-wells__bg-img');
+    const finishBlock = document.querySelector('.calc-wells__finish');
 
-  isShowCaclTab();
-
-  // преключаем между "Глубина скважины" и "Район бурения"
-  function isShowCaclTab() {
-    inptBtn.addEventListener('click', (e) =>
-      cliclBtn(calcBtn, inptBtn, inptCalc, slectAreaCalc, true)
-    );
-    calcBtn.addEventListener('click', (e) =>
-      cliclBtn(inptBtn, calcBtn, slectAreaCalc, inptCalc, false)
-    );
-    function cliclBtn(
-      removeSelector,
-      addSelector,
-      isHiddenCalc,
-      isHiddenInpt,
-      booleanValue
-    ) {
-      removeSelector.classList.remove('_active');
-      addSelector.classList.add('_active');
-      isHiddenInpt.hidden = true;
-      isHiddenCalc.hidden = false;
-      isActiv = booleanValue;
-    }
-  }
-
-  // кнопка "Рассчитать"
-
-  sumBtn.addEventListener('click', resultCalc);
-  // сделать проерку на эту кнопку
-
-  // selectCalc.setSelectChange(oneSelect);
-
-  function resultCalc(e) {
+    const sumBlock = document.querySelector('.calc-wells__sum');
+    let isActiv = true;
     let res = 0;
-    let depthValue = isActiv ? +inptCalc.value : +findValueOption(threeSelect);
-    let wellsValue = oneSelect.value === 'Артезианская скважина' ? 3350 : 3250;
-    let arrangementValue = +twoSelect.value ? +twoSelect.value : '';
 
-    if (depthValue >= 251) {
-      return;
+    isShowCaclTab();
+
+    // преключаем между "Глубина скважины" и "Район бурения"
+    function isShowCaclTab() {
+      inptBtn.addEventListener('click', (e) =>
+        cliclBtn(calcBtn, inptBtn, inptCalc, slectAreaCalc, true)
+      );
+      calcBtn.addEventListener('click', (e) =>
+        cliclBtn(inptBtn, calcBtn, slectAreaCalc, inptCalc, false)
+      );
+      function cliclBtn(
+        removeSelector,
+        addSelector,
+        isHiddenCalc,
+        isHiddenInpt,
+        booleanValue
+      ) {
+        removeSelector.classList.remove('_active');
+        addSelector.classList.add('_active');
+        isHiddenInpt.hidden = true;
+        isHiddenCalc.hidden = false;
+        isActiv = booleanValue;
+      }
     }
 
-    if (depthValue < 40) {
-      depthValue = 40;
-    }
-    if (depthValue > 80) {
-      wellsValue = wellsValue + 100;
-    }
+    // кнопка "Рассчитать"
+    sumBtn.addEventListener('click', resultCalc);
+    function resultCalc(e) {
+      let depthValue = isActiv ? inptCalc.value : findValueOption(threeSelect);
+      let wellsValue =
+        oneSelect.value === 'Артезианская скважина' ? 3350 : 3250;
+      let arrangementValue = twoSelect.value ? twoSelect.value : '';
 
-    res = wellsValue * depthValue + arrangementValue;
+      if (depthValue < 40) {
+        depthValue = 40;
+      }
+      if (depthValue > 80) {
+        wellsValue = wellsValue + 100;
+      }
 
-    console.log(res);
-  }
-  // берем значения с "Район бурения"
-  function findValueOption(select) {
-    const option = select.querySelector(`option[value="${select.value}"]`);
-    return option.dataset.valueDepth;
+      res = String(+wellsValue * +depthValue + +arrangementValue);
+
+      const newRes = res
+        .split('')
+        .reverse()
+        .map((it, indx) => {
+          if (indx == 0) return it;
+          if (indx % 3 == 0) {
+            return `${it} `;
+          }
+          return it;
+        })
+        .reverse()
+        .join('');
+
+      if (res) {
+        if (windowSizeUser()) {
+          animatBlcok();
+        } else {
+          finishBlock.classList.add('_animat-mob');
+        }
+        finishBlock.hidden = false;
+        sumBlock.innerHTML = `${newRes} р.`;
+      }
+    }
+    // события  на ввод макс.глубину 250
+    inptCalc.addEventListener('input', (event) => {
+      const num = 250;
+      if (event.target.value > num) {
+        event.target.value = num;
+        event.target.max = num;
+      }
+    });
+    // берем значения с "Район бурения"
+    function findValueOption(select) {
+      const option = select.querySelector(`option[value="${select.value}"]`);
+      return option.dataset.valueDepth;
+    }
+    function animatBlcok() {
+      imgBlock.classList.add('_animat');
+      finishBlock.classList.add('_animat');
+    }
   }
 }
+
+function windowSizeUser() {
+  if (window.matchMedia('(min-width: 767.98px)').matches) {
+    return true;
+  } else {
+    // pageNavigation();
+    return false;
+  }
+}
+
+window.addEventListener('resize', windowSizeUser);
+
 initCalcWells();
+// ==========================================================================
+// ==========================================================================
+// ==========================================================================
+export function pageNavigation() {
+  // data-goto - указать ID блока
+  // data-goto-header - учитывать header
+  // data-goto-speed - скорость (только если используется доп плагин)
+  // Работаем при клике на пункт
+  document.addEventListener('click', pageNavigationAction);
+  // Если подключен scrollWatcher, подсвечиваем текущий пукт меню
+  document.addEventListener('watcherCallback', pageNavigationAction);
+  // Основная функция
+  function pageNavigationAction(e) {
+    if (e.type === 'click') {
+      const targetElement = e.target;
+      if (targetElement.closest('[data-goto]')) {
+        const gotoLink = targetElement.closest('[data-goto]');
+        const gotoLinkSelector = gotoLink.dataset.goto
+          ? gotoLink.dataset.goto
+          : '';
+        const noHeader = gotoLink.hasAttribute('data-goto-header')
+          ? true
+          : false;
+        const gotoSpeed = gotoLink.dataset.gotoSpeed
+          ? gotoLink.dataset.gotoSpeed
+          : '500';
+        gotoBlock(gotoLinkSelector, noHeader, gotoSpeed);
+        e.preventDefault();
+      }
+    } else if (e.type === 'watcherCallback') {
+      if (e.detail) {
+        const entry = e.detail.entry;
+        const targetElement = entry.target;
+        // Обработка пунктов навигации, если указано значение navigator подсвечиваем текущий пукт меню
+        if (targetElement.dataset.watch === 'navigator') {
+          const navigatorItem = targetElement.id;
+          const navigatorActiveItem = document.querySelector(
+            `[data-goto]._navigator-active`
+          );
+          const navigatorCurrentItem = document.querySelector(
+            `[data-goto="${navigatorItem}"]`
+          );
+          if (entry.isIntersecting) {
+            // Видим объект
+            // navigatorActiveItem ? navigatorActiveItem.classList.remove('_navigator-active') : null;
+            navigatorCurrentItem
+              ? navigatorCurrentItem.classList.add('_navigator-active')
+              : null;
+          } else {
+            // Не видим объект
+            navigatorCurrentItem
+              ? navigatorCurrentItem.classList.remove('_navigator-active')
+              : null;
+          }
+        }
+      }
+    }
+  }
+}
+// Модуль плавной проктутки к блоку
+export let gotoBlock = (
+  targetBlock,
+  noHeader = false,
+  speed = 500,
+  offset = 0
+) => {
+  const targetBlockElement = document.querySelector(targetBlock);
+  if (targetBlockElement) {
+    let headerItem = '';
+    let headerItemHeight = 0;
+    if (noHeader) {
+      headerItem = 'header.header';
+      headerItemHeight = document.querySelector(headerItem).offsetHeight;
+    }
+    let options = {
+      speedAsDuration: true,
+      speed: speed,
+      header: headerItem,
+      offset: offset,
+      easing: 'easeOutQuad',
+    };
+    // Закрываем меню, если оно открыто
+    document.documentElement.classList.contains('menu-open')
+      ? menuClose()
+      : null;
+
+    if (typeof SmoothScroll !== 'undefined') {
+      // Прокрутка с использованием дополнения
+      new SmoothScroll().animateScroll(targetBlockElement, '', options);
+    } else {
+      // Прокрутка стандартными средствами
+      let targetBlockElementPosition =
+        targetBlockElement.getBoundingClientRect().top + scrollY;
+      window.scrollTo({
+        top: headerItemHeight
+          ? targetBlockElementPosition - headerItemHeight
+          : targetBlockElementPosition,
+        behavior: 'smooth',
+      });
+    }
+  } else {
+  }
+};

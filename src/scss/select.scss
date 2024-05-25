@@ -24,11 +24,11 @@
 	&__label {
 		width: 100%;
 		padding: 15px 0px 15px 20px;
-		font-weight: 700;
+		font-weight: 500;
 	}
 	// .select__value
 	&__value {
-		font-weight: 700;
+		font-weight: 500;
 		display: flex;
 		align-items: center;
 		height: 100%;
@@ -63,13 +63,14 @@
 	}
 	// .select__options
 	&__options {
+		border-top: 1px solid rgba(16, 41, 56, 0.1176470588);
 		width: 100%;
 		color: #000;
 		position: absolute;
-		top: 43px;
+		top: 47.5px;
 		min-width: 100%;
 		left: 0;
-		z-index: 1000;
+		z-index: 111;
 		background-color: #ffffff;
 		border-radius: 0 0 $smallRadiusBor $smallRadiusBor;
 		box-shadow: 5px 18px 20px rgba(0, 0, 0, 0.0823529412);
@@ -89,13 +90,13 @@
 	}
 	// .select__option
 	&__option {
-		font-weight: 700;
+		font-weight: 500;
 		width: 99%;
 		display: block;
 		text-align: left;
 		cursor: pointer;
 		margin: 3px 3px;
-		padding: 13px 18px;
+		padding: 6px 18px;
 		color: inherit;
 
 		&._select-selected {
@@ -110,6 +111,10 @@
 	}
 	&__input {
 		border-bottom: 0 !important;
+		&::placeholder {
+			color: $mainColor !important;
+			font-weight: 500;
+		}
 	}
 	// Конструкция дополнительных данных
 	&__row {
@@ -123,7 +128,6 @@
 
 	// Состояния селекта
 	&._select-open {
-		z-index: 5;
 	}
 	&._select-disabled {
 	}

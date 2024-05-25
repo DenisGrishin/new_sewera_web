@@ -363,11 +363,11 @@
 				<section class="section ">
 					<div class="page-bl">
 						<div class="wrapper-bg calc-wells">
-							<h2 class="title-section">Рассчитайте самостоятельно <br> стоимость скважины на воду</h2>
-							<form class="calc-wells__forms">
+							<h2 class="title-section">Рассчитайте самостоятельно стоимость скважины на воду</h2>
+							<div class="calc-wells__body">
 								<div class="calc-wells__left">
 									<div class="calc-wells__block">
-										<h4 class="calc-wells__title">Вид скважины</h4>
+										<div class="calc-wells__title">Вид скважины</div>
 										<select name="Вид скважины" class="form" data-show>
 											<option value data-label="Тип скважины"></option>
 											<option value="Артезианская скважина">Артезианская скважина</option>
@@ -375,7 +375,7 @@
 										</select>
 									</div>
 									<div class="calc-wells__block">
-										<h4 class="calc-wells__title">Вид обустроства</h4>
+										<div class="calc-wells__title">Вид обустроства</div>
 										<select name="Вид обустроства" class="form">
 											<option value="0">Без обустройства</option>
 											<option value="250000">С кессоном</option>
@@ -384,18 +384,21 @@
 										</select>
 									</div>
 
-									<div class="calc-wells__block calc-wells__block_mb-big calc-wells__search-icon">
+
+									<div class="calc-wells__block calc-wells__block_mb-big ">
 										<div class="calc-wells__top-block">
 											<button type="button" class="calc-wells__title-block  _active" id='int'>Глубина
 												скважины,
 												м</button>
-											<button type="button" class="calc-wells__title-block " id='calc'>Район бурения</button>
+											<button type="button" class="calc-wells__title-block " id='calc'>Район
+												бурения</button>
 											<a href="#" class="calc-wells__link-block">Карта глубин</a>
 										</div>
 										<div class="calc-wells__wrapper-inpt ">
-											<input type="number" class="calc-wells__inpt " placeholder="Глубина скважины, м"
-												step="1" min="1" max="250" name="Глубина скважины">
-											<div class="calc-wells__select" hidden>
+											<input id="len" type="number" class="calc-wells__inpt "
+												placeholder="Глубина скважины, м" step="1" min="1" max="250"
+												name="Глубина скважины">
+											<div class="calc-wells__select calc-wells__search-icon" hidden>
 												<select name="Район бурения" data-search class="form" data-scroll>
 													<option value="Балашихинский" data-value-depth="65">Балашихинский </option>
 													<option value="Волоколамский" data-value-depth="110">Волоколамский</option>
@@ -417,11 +420,11 @@
 													<option value="Мытищинский" data-value-depth="100">Мытищинский</option>
 													<option value="Наро-Фоминский" data-value-depth="60">Мытищинский</option>
 													<option value="Новая Москва" data-value-depth="95">Новая Москва</option>
-													<!--  -->
 													<option value="Ногинский" data-value-depth="65">Ногинский</option>
 													<option value="Одинцовский" data-value-depth="105">Одинцовский</option>
 													<option value="Озерский" data-value-depth="50">Озерский</option>
-													<option value="Орехово-Зуевский" data-value-depth="55">Орехово-Зуевский</option>
+													<option value="Орехово-Зуевский" data-value-depth="55">Орехово-Зуевский
+													</option>
 													<option value="Павлово-Посадский" data-value-depth="55">Павлово-Посадский
 													</option>
 													<option value="Подольский" data-value-depth="55">Подольский</option>
@@ -450,51 +453,49 @@
 													</option>
 													<option value="Щелковский" data-value-depth="65">Щелковский
 													</option>
-
-
-
-
 												</select>
 											</div>
 										</div>
 									</div>
-									<button type="submit" class="calc-wells__btn _btn-arrow-org button _disable"
-										disabled>Рассчитать</button>
+
+									<button type="submit" data-goto="#calc-wells__finish"
+										class="calc-wells__btn _btn-arrow-org button _disable" disabled>Рассчитать</button>
+
 								</div>
 								<div class="calc-wells__right">
-									<img src="img/banner-img.webp" alt="Рассчитайте самостоятельно стоимость скважины на воду">
-								</div>
-								<div class="calc-wells__finish">
-									<div class="calc-wells__wrapper-finish">
-										<h4><b>Предварительная стоимость</b></h4>
-										<div class="calc-wells__sum">145 600 р.</div>
-										<div class="calc-wells__text">Чтобы получить точную смету, рекомендуем пообщаться с
-											менеджером</div>
-										<div class="calc-wells__user-contact">
-											<div class="feedback_form__group calc-wells__int-blc ">
-												<input class="feedback_form__group-input hover-group-input" type="text"
-													id="feedback-form-name" name="Имя">
-												<label class="feedback_form__group-placeholder"
-													for="feedback-form-name"><span>Имя</span></label>
-											</div>
-											<div class="feedback_form__group form-qwiz__after-none calc-wells__int-blc">
-												<input class="feedback_form__group-input phone_mask hover-group-input" type="tel"
-													id="feedback-form-tel" autocomplete="off" name="Телефон" required="">
-												<label class="feedback_form__group-placeholder"
-													for="feedback-form-tel"><span>Телефон</span></label>
-											</div>
-											<div class="calc-wells__block-user">
-												<button type="submit" class="calc-wells__btn button _btn-arrow-org">
-													Оставить заявку
-												</button>
+									<div class="calc-wells__bg-img"></div>
+									<form id="calc-wells__finish" class="calc-wells__finish ">
+										<div class="calc-wells__wrapper-finish">
+											<div><b>Предварительная стоимость</b></div>
+											<div class="calc-wells__sum">145 600 р.</div>
+											<div class="calc-wells__text">Чтобы получить точную смету, рекомендуем пообщаться с
+												менеджером</div>
+											<div class="calc-wells__user-contact">
+												<div class="feedback_form__group calc-wells__int-blc ">
+													<input class="feedback_form__group-input hover-group-input" type="text"
+														id="feedback-form-name" name="Имя">
+													<label class="feedback_form__group-placeholder"
+														for="feedback-form-name"><span>Имя</span></label>
+												</div>
+												<div class="feedback_form__group form-qwiz__after-none calc-wells__int-blc">
+													<input class="feedback_form__group-input phone_mask hover-group-input" type="tel"
+														id="feedback-form-tel" autocomplete="off" name="Телефон" required="">
+													<label class="feedback_form__group-placeholder"
+														for="feedback-form-tel"><span>Телефон</span></label>
+												</div>
+												<div class="calc-wells__block-user">
+													<button type="submit" class="calc-wells__btn button _btn-arrow-org">
+														Оставить заявку
+													</button>
+												</div>
 											</div>
 										</div>
-									</div>
+									</form>
 								</div>
 
-							</form>
+								</duv>
+							</div>
 						</div>
-					</div>
 				</section>
 
 				<section class="section types-wells">
