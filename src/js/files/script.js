@@ -3143,7 +3143,7 @@ function windowSizeUser() {
   if (window.matchMedia('(min-width: 767.98px)').matches) {
     return true;
   } else {
-    // pageNavigation();
+    pageNavigation();
     return false;
   }
 }

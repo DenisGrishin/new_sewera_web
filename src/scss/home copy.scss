@@ -902,14 +902,12 @@
 	border-bottom: 1px solid #f0f4f9;
 }
 .sewera-septik .ya-map__navigation {
-	// padding: 0px 30px;
+	padding: 0px 30px;
 }
 .sewera-septik .ya-map__wr-tabs {
-	// padding: 30px 0px 20px;
+	padding: 30px 0px 20px;
 }
-.ya-map__tab-cont-mb {
-	margin-bottom: 60px;
-}
+
 .sewera-septik .ya-map__title span {
 	max-width: 100% !important;
 }
@@ -1096,13 +1094,7 @@
 	// .ya-map__tabs
 
 	&__tabs {
-		padding-left: 30px;
-		padding-top: 30px;
 		margin-bottom: 20px;
-		@media (max-width: $tablet) {
-			padding-left: 20px;
-			padding-top: 20px;
-		}
 		@media (max-width: 374.98px) {
 			display: grid;
 			row-gap: 10px;
@@ -1143,15 +1135,9 @@
 }
 
 .sewera-septik .show-more-city {
-	padding-left: 30px;
-	padding-bottom: 30px;
 	@media (max-width: $laptop) {
 		font-size: $smallfontSize;
 		line-height: $smallLh;
-	}
-	@media (max-width: $tablet) {
-		padding-left: 20px;
-		padding-bottom: 20px;
 	}
 	// .show-more-city__header
 
