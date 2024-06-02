@@ -99,7 +99,7 @@ function initSliders() {
       spaceBetween: 0,
       speed: 300,
 
-      loop: true,
+      loop: false,
       navigation: {
         nextEl: '.popular-models__nav .popular-models__next',
         prevEl: '.popular-models__nav .popular-models__prev',
@@ -111,7 +111,8 @@ function initSliders() {
         },
         374.98: {
           slidesPerView: 1.4,
-          centeredSlides: true,
+          // initialSlide: 1,
+          // centeredSlides: true,
         },
 
         768: {
@@ -126,10 +127,6 @@ function initSliders() {
       },
       on: {},
     });
-    setTimeout(() => {
-      pop.loopDestroy();
-      pop.loopCreate();
-    }, 1);
   }
 
   // слайдер телеграм
@@ -1598,8 +1595,8 @@ function tabModificationModel() {
             element.dataset.slideId ===
             target.closest('[data-top-id]').dataset.topId
           ) {
-            findIndxSlide = slideModel[+element.dataset.swiperSlideIndex + 4];
-            indxSlide = element.dataset.swiperSlideIndex;
+            findIndxSlide = slideModel[+element.dataset.slideId];
+            indxSlide = element.dataset.slideId;
             activeTopBtn = searchActiveBtn(
               findIndxSlide.querySelector('.card-model__top-btns')
             );
@@ -1619,7 +1616,7 @@ function tabModificationModel() {
             element.dataset.slideId ===
             target.closest('[data-bottom-id]').dataset.bottomId
           ) {
-            findIndxSlide = slideModel[+element.dataset.swiperSlideIndex + 4];
+            findIndxSlide = slideModel[+element.dataset.slideId];
             indxSlide = element.dataset.slideId;
             activeTopBtn = searchActiveBtn(
               findIndxSlide.querySelector('.card-model__top-btns')
