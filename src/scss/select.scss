@@ -1,0 +1,147 @@
+// // <SELECT>
+// // Снипет (HTML): sel
+// .sewera-septik .select {
+// 	position: relative;
+// 	// .select__body
+// 	&__body {
+// 		position: relative;
+// 	}
+// 	// .select__title
+// 	&__title {
+// 		color: inherit;
+// 		text-align: left;
+
+// 		background-color: #fff;
+// 		cursor: pointer;
+// 		width: 100%;
+// 		max-width: 572px;
+// 		border-radius: 4px;
+
+// 		@media (max-width: $tablet) {
+// 			max-width: 100%;
+// 		}
+// 	}
+// 	&__label {
+// 		width: 100%;
+// 		padding: 15px 0px 15px 20px;
+// 		font-weight: 500;
+// 	}
+// 	// .select__value
+// 	&__value {
+// 		font-weight: 500;
+// 		display: flex;
+// 		align-items: center;
+// 		height: 100%;
+// 		width: 100%;
+// 		padding: 15px 18px;
+// 		justify-content: space-between;
+// 		flex-direction: row-reverse;
+// 		&:before {
+// 			content: "";
+// 			flex: 0 0 10px;
+// 			transition: all 0.3s ease 0s;
+// 			display: flex;
+// 			width: 9px;
+// 			height: 17px;
+// 			background: url("../img/icons/selectButton.svg") 0 0 no-repeat;
+// 			._select-open & {
+// 				transform: rotate(-180deg);
+// 			}
+// 		}
+// 	}
+// 	// .select__text
+// 	&__text {
+// 		flex: 1 1 auto;
+// 	}
+// 	&__input {
+// 		padding: 0;
+// 		padding-left: 25px;
+// 		width: 100%;
+// 		background-color: transparent;
+// 		height: 100%;
+// 		font-weight: 400;
+// 	}
+// 	// .select__options
+// 	&__options {
+// 		border-top: 1px solid rgba(16, 41, 56, 0.1176470588);
+// 		width: 100%;
+// 		color: #000;
+// 		position: absolute;
+// 		top: 47.5px;
+// 		min-width: 100%;
+// 		left: 0;
+// 		z-index: 111;
+// 		background-color: #ffffff;
+// 		border-radius: 0 0 $smallRadiusBor $smallRadiusBor;
+// 		box-shadow: 5px 18px 20px rgba(0, 0, 0, 0.0823529412);
+// 	}
+// 	// .select__scroll
+// 	&__scroll {
+// 		overflow-y: auto;
+// 		overflow-x: hidden;
+// 		// Максимальная высота
+// 		max-height: 200px;
+// 		// Стили скроллбара
+// 		.simplebar-scrollbar {
+// 			&::before {
+// 				//opacity: 1;
+// 			}
+// 		}
+// 	}
+// 	// .select__option
+// 	&__option {
+// 		font-weight: 500;
+// 		width: 99%;
+// 		display: block;
+// 		text-align: left;
+// 		cursor: pointer;
+// 		margin: 3px 3px;
+// 		padding: 6px 18px;
+// 		color: inherit;
+
+// 		&._select-selected {
+// 			background-color: #fff;
+// 		}
+// 		@media (any-hover: hover) {
+// 			&:hover {
+// 				background: $bgColor;
+// 				border-radius: 6px;
+// 			}
+// 		}
+// 	}
+// 	&__input {
+// 		font-weight: 500;
+// 		border-bottom: 0 !important;
+// 		&::placeholder {
+// 			color: $mainColor !important;
+// 			font-weight: 500;
+// 			@media (max-width: $laptop) {
+// 				font-size: $smallfontSize;
+// 				line-height: $smallLh;
+// 			}
+// 		}
+// 	}
+// 	// Конструкция дополнительных данных
+// 	&__row {
+// 		display: inline-flex;
+// 		align-items: center;
+// 	}
+// 	&__asset {
+// 	}
+// 	&__text {
+// 	}
+
+// 	// Состояния селекта
+// 	&._select-open {
+// 	}
+// 	&._select-disabled {
+// 	}
+// 	&._select-active {
+// 	}
+// 	&._select-focus {
+// 	}
+// 	&._select-multiple {
+// 	}
+// 	&._select-checkbox {
+// 	}
+// }
