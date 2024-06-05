@@ -4759,6 +4759,10 @@ sewera-septik .form-qwiz__user-contact {
 	}
 }
 @media (max-width: 767.98px) {
+	.sewera-septik .service-block__texts {
+		font-size: $smallfontSize;
+		line-height: $smallLh;
+	}
 	.sewera-septik ._awp .calc-wells__right {
 		width: auto !important;
 	}
