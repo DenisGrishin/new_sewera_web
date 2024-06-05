@@ -1,0 +1,65 @@
+* {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+*,
+.sewera-septik *,
+.sewera-septik :after,
+.sewera-septik:before {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+	min-width: $minWidth + px;
+}
+.sewera-septik {
+	color: $mainColor !important;
+	line-height: $mainLineHeight;
+	font-family: $fontFamily;
+	font-size: $fontSize;
+	//text-rendering: optimizeLegibility;
+	-ms-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.sewera-septik input,
+.sewera-septik button,
+.sewera-septik textarea {
+	font-family: $fontFamily;
+}
+.sewera-septik button {
+	cursor: pointer;
+	color: inherit;
+	// background-color: inherit !important;
+}
+.sewera-septik a {
+	color: inherit;
+}
+.sewera-septik a:link,
+.sewera-septik a:visited {
+	text-decoration: none;
+}
+.sewera-septik a:hover {
+	text-decoration: none;
+}
+.sewera-septik ul li {
+	list-style: none;
+}
+.sewera-septik img {
+	vertical-align: top;
+}
+// .sewera-septik h1,
+// .sewera-septik h2,
+// .sewera-septik h3,
+// .sewera-septik h4,
+// .sewera-septik h5,
+// .sewera-septik h6 {
+// 	font-weight: inherit;
+// 	font-size: inherit;
+// }
