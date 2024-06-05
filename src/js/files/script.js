@@ -1724,7 +1724,6 @@ function tabModificationModel() {
   }
 }
 tabModificationModel();
-
 function rangeInit() {
   const arbitraryValuesForSlider = [
     '1',
@@ -2530,7 +2529,6 @@ export class SelectConstructor {
     // Сеттер элементов списка (options)
     this.setOptions(selectItem, originalSelect);
     // Если включена опция поиска data-search, запускаем обработчик
-
     originalSelect.hasAttribute('data-search')
       ? this.searchActions(selectItem)
       : null;
@@ -2545,7 +2543,6 @@ export class SelectConstructor {
   selectsActions(e) {
     const targetElement = e.target;
     const targetType = e.type;
-
     if (
       targetElement.closest(
         this.getSelectClass(this.selectClasses.classSelect)
@@ -2639,7 +2636,6 @@ export class SelectConstructor {
       this.selectsСlose();
     }
   }
-
   // Функция закрытия всех селектов
   selectsСlose() {
     const selectActiveItems = document.querySelectorAll(
