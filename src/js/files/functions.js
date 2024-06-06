@@ -205,136 +205,6 @@ export function spollers() {
     }
   }
 }
-// Модуль "показать еще" =======================================================================================================================================================================================================================
-/*
-Документация по работе в шаблоне:
-data-showmore-media = "768,min"
-data-showmore="size/items"
-data-showmore-content="размер/кол-во"
-data-showmore-button="скорость"
-Сниппет (HTML): showmore
-*/
-export function showMore() {
-  const showMoreBlocks = document.querySelectorAll('[data-showmore]');
-  let showMoreBlocksRegular;
-  let mdQueriesArray;
-
-  if (showMoreBlocks.length) {
-    // Получение обычных объектов
-    showMoreBlocksRegular = Array.from(showMoreBlocks).filter(function (
-      item,
-      index,
-      self
-    ) {
-      return !item.dataset.showmoreMedia;
-    });
-    // Инициализация обычных объектов
-    showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
-
-    document.querySelectorAll('[data-showmore-button]').forEach((element) => {
-      element.addEventListener('click', showMoreActions, true);
-    });
-    // window.addEventListener('resize', showMoreActions);
-  }
-  function initItemsMedia(mdQueriesArray) {
-    mdQueriesArray.forEach((mdQueriesItem) => {
-      initItems(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
-    });
-  }
-  function initItems(showMoreBlocks, matchMedia) {
-    showMoreBlocks.forEach((showMoreBlock) => {
-      initItem(showMoreBlock, matchMedia);
-    });
-  }
-  function initItem(showMoreBlock, matchMedia = false) {
-    showMoreBlock = matchMedia ? showMoreBlock.item : showMoreBlock;
-    const showMoreContent = showMoreBlock.querySelector(
-      '[data-showmore-content]'
-    );
-    const showMoreButton = showMoreBlock.querySelector(
-      '[data-showmore-button]'
-    );
-    const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
-
-    if (matchMedia.matches || !matchMedia) {
-      if (hiddenHeight < getOriginalHeight(showMoreContent)) {
-        _slideUp(showMoreContent, 0, hiddenHeight);
-        showMoreButton.hidden = false;
-      } else {
-        _slideDown(showMoreContent, 0, hiddenHeight);
-        showMoreButton.hidden = true;
-      }
-    } else {
-      _slideDown(showMoreContent, 0, hiddenHeight);
-      showMoreButton.hidden = true;
-    }
-  }
-  function getHeight(showMoreBlock, showMoreContent) {
-    let hiddenHeight = 0;
-    const showMoreType = showMoreBlock.dataset.showmore
-      ? showMoreBlock.dataset.showmore
-      : 'size';
-    if (showMoreType === 'items') {
-      const showMoreTypeValue = showMoreContent.dataset.showmoreContent
-        ? showMoreContent.dataset.showmoreContent
-        : 3;
-      const showMoreItems = showMoreContent.children;
-      for (let index = 1; index < showMoreItems.length; index++) {
-        const showMoreItem = showMoreItems[index - 1];
-        hiddenHeight += showMoreItem.offsetHeight;
-        if (index === showMoreTypeValue) break;
-      }
-    } else {
-      const showMoreTypeValue = showMoreContent.dataset.showmoreContent
-        ? showMoreContent.dataset.showmoreContent
-        : 150;
-      hiddenHeight = showMoreTypeValue;
-    }
-    return hiddenHeight;
-  }
-
-  function getOriginalHeight(showMoreContent) {
-    let hiddenHeight = showMoreContent.offsetHeight;
-    showMoreContent.style.removeProperty('height');
-    let originalHeight = showMoreContent.offsetHeight;
-    showMoreContent.style.height = `${hiddenHeight}px`;
-
-    return originalHeight;
-  }
-  function showMoreActions(e) {
-    const targetEvent = e.target;
-    const targetType = e.type;
-    if (targetType === 'click') {
-      if (targetEvent.closest('[data-showmore-button]')) {
-        const showMoreButton = targetEvent.closest('[data-showmore-button]');
-        const showMoreBlock = showMoreButton.closest('[data-showmore]');
-        const showMoreContent = showMoreBlock.querySelector(
-          '[data-showmore-content]'
-        );
-        getOriginalHeight(showMoreContent);
-        const showMoreSpeed = showMoreBlock.dataset.showmoreButton
-          ? showMoreBlock.dataset.showmoreButton
-          : '500';
-        const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
-        if (!showMoreContent.classList.contains('_slide')) {
-          showMoreBlock.classList.contains('_showmore-active')
-            ? _slideUp(showMoreContent, showMoreSpeed, hiddenHeight)
-            : _slideDown(showMoreContent, showMoreSpeed, hiddenHeight);
-          showMoreBlock.classList.toggle('_showmore-active');
-        }
-      }
-    } else if (targetType === 'resize') {
-      showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
-      // mdQueriesArray.length ? initItemsMedia(mdQueriesArray) : null;
-    }
-
-    if (document.querySelector('.ya-map__tab') && targetType === 'click') {
-      if (!e.target.matches('.ya-map__tab')) {
-        e.stopImmediatePropagation();
-      }
-    }
-  }
-}
 // Модуь работы с табами =======================================================================================================================================================================================================================
 /*
 Для родителя табов пишем атрибут data-tabs
@@ -351,22 +221,19 @@ export function showMore() {
 */
 export function tabs() {
   const tabs = document.querySelectorAll('[data-tabs]');
-  let tabsActiveHash = [''];
+  let tabsActiveHash = [];
 
   if (tabs.length > 0) {
-    const hash = '#tab-0-1';
+    const hash = location.hash.replace('#', '');
     if (hash.startsWith('tab-')) {
-      tabsActiveHash = '#tab-0-1';
+      tabsActiveHash = hash.replace('tab-', '').split('-');
     }
-
-    setTimeout(() => {
-      tabs.forEach((tabsBlock, index) => {
-        tabsBlock.classList.add('_tab-init');
-        tabsBlock.setAttribute('data-tabs-index', index);
-        tabsBlock.addEventListener('click', setTabsAction);
-        initTabs(tabsBlock);
-      });
-    }, 30);
+    tabs.forEach((tabsBlock, index) => {
+      tabsBlock.classList.add('_tab-init');
+      tabsBlock.setAttribute('data-tabs-index', index);
+      tabsBlock.addEventListener('click', setTabsAction);
+      initTabs(tabsBlock);
+    });
   }
 
   // Работа с контентом
@@ -374,7 +241,6 @@ export function tabs() {
     const tabsTitles = tabsBlock.querySelectorAll('[data-tabs-titles]>*');
     const tabsContent = tabsBlock.querySelectorAll('[data-tabs-body]>*');
     const tabsBlockIndex = tabsBlock.dataset.tabsIndex;
-
     const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
 
     if (tabsActiveHashBlock) {
@@ -433,15 +299,7 @@ export function tabs() {
   }
   function setTabsAction(e) {
     const el = e.target;
-
-    if (el.closest('.block__more')) {
-      return;
-    }
     if (el.closest('[data-tabs-title]')) {
-      setTimeout(() => {
-        showMore();
-      }, 10);
-
       const tabTitle = el.closest('[data-tabs-title]');
       const tabsBlock = tabTitle.closest('[data-tabs]');
       if (
@@ -456,7 +314,6 @@ export function tabs() {
         }
 
         tabTitle.classList.add('_tab-active');
-
         setTabsStatus(tabsBlock);
       }
       e.preventDefault();
@@ -464,6 +321,123 @@ export function tabs() {
   }
 }
 
+// Модуль "показать еще" =======================================================================================================================================================================================================================
+/*
+Документация по работе в шаблоне:
+data-showmore-media = "768,min"
+data-showmore="size/items"
+data-showmore-content="размер/кол-во"
+data-showmore-button="скорость"
+Сниппет (HTML): showmore
+*/
+export function showMore() {
+  const showMoreBlocks = document.querySelectorAll('[data-showmore]');
+  let showMoreBlocksRegular;
+  let mdQueriesArray;
+  if (showMoreBlocks.length) {
+    // Получение обычных объектов
+    showMoreBlocksRegular = Array.from(showMoreBlocks).filter(function (
+      item,
+      index,
+      self
+    ) {
+      return !item.dataset.showmoreMedia;
+    });
+    // Инициализация обычных объектов
+    showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
+
+    document.addEventListener('click', showMoreActions);
+    window.addEventListener('resize', showMoreActions);
+  }
+  function initItemsMedia(mdQueriesArray) {
+    mdQueriesArray.forEach((mdQueriesItem) => {
+      initItems(mdQueriesItem.itemsArray, mdQueriesItem.matchMedia);
+    });
+  }
+  function initItems(showMoreBlocks, matchMedia) {
+    showMoreBlocks.forEach((showMoreBlock) => {
+      initItem(showMoreBlock, matchMedia);
+    });
+  }
+  function initItem(showMoreBlock, matchMedia = false) {
+    showMoreBlock = matchMedia ? showMoreBlock.item : showMoreBlock;
+    const showMoreContent = showMoreBlock.querySelector(
+      '[data-showmore-content]'
+    );
+    const showMoreButton = showMoreBlock.querySelector(
+      '[data-showmore-button]'
+    );
+    const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
+    if (matchMedia.matches || !matchMedia) {
+      if (hiddenHeight < getOriginalHeight(showMoreContent)) {
+        _slideUp(showMoreContent, 0, hiddenHeight);
+        showMoreButton.hidden = false;
+      } else {
+        _slideDown(showMoreContent, 0, hiddenHeight);
+        showMoreButton.hidden = true;
+      }
+    } else {
+      _slideDown(showMoreContent, 0, hiddenHeight);
+      showMoreButton.hidden = true;
+    }
+  }
+  function getHeight(showMoreBlock, showMoreContent) {
+    let hiddenHeight = 0;
+    const showMoreType = showMoreBlock.dataset.showmore
+      ? showMoreBlock.dataset.showmore
+      : 'size';
+    if (showMoreType === 'items') {
+      const showMoreTypeValue = showMoreContent.dataset.showmoreContent
+        ? showMoreContent.dataset.showmoreContent
+        : 3;
+      const showMoreItems = showMoreContent.children;
+      for (let index = 1; index < showMoreItems.length; index++) {
+        const showMoreItem = showMoreItems[index - 1];
+        hiddenHeight += showMoreItem.offsetHeight;
+        if (index === showMoreTypeValue) break;
+      }
+    } else {
+      const showMoreTypeValue = showMoreContent.dataset.showmoreContent
+        ? showMoreContent.dataset.showmoreContent
+        : 150;
+      hiddenHeight = showMoreTypeValue;
+    }
+    return hiddenHeight;
+  }
+  function getOriginalHeight(showMoreContent) {
+    let hiddenHeight = showMoreContent.offsetHeight;
+    showMoreContent.style.removeProperty('height');
+    let originalHeight = showMoreContent.offsetHeight;
+    showMoreContent.style.height = `${hiddenHeight}px`;
+    return originalHeight;
+  }
+  function showMoreActions(e) {
+    const targetEvent = e.target;
+    const targetType = e.type;
+    if (targetType === 'click') {
+      if (targetEvent.closest('[data-showmore-button]')) {
+        const showMoreButton = targetEvent.closest('[data-showmore-button]');
+        const showMoreBlock = showMoreButton.closest('[data-showmore]');
+        const showMoreContent = showMoreBlock.querySelector(
+          '[data-showmore-content]'
+        );
+        const showMoreSpeed = showMoreBlock.dataset.showmoreButton
+          ? showMoreBlock.dataset.showmoreButton
+          : '500';
+        const hiddenHeight = getHeight(showMoreBlock, showMoreContent);
+        if (!showMoreContent.classList.contains('_slide')) {
+          showMoreBlock.classList.contains('_showmore-active')
+            ? _slideUp(showMoreContent, showMoreSpeed, hiddenHeight)
+            : _slideDown(showMoreContent, showMoreSpeed, hiddenHeight);
+          showMoreBlock.classList.toggle('_showmore-active');
+        }
+      }
+    } else if (targetType === 'resize') {
+      showMoreBlocksRegular.length ? initItems(showMoreBlocksRegular) : null;
+      // mdQueriesArray.length ? initItemsMedia(mdQueriesArray) : null;
+    }
+  }
+}
 // Модуль попапов ===========================================================================================================================================================================================================================
 /*
 Документация по работе в шаблоне:
